@@ -3,6 +3,6 @@ import { env } from './config/env';
 
 const app = createApp({ corsOrigins: env.corsOrigins });
 
-app.listen(env.port, () => {
+app.listen(env.port, (): void => {
   console.log(`Server listening on port ${env.port}`);
 });
