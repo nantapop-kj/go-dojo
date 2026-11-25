@@ -1,15 +1,8 @@
+import { createApp } from './app';
+import { env } from './config/env';
 
-import express from "express";
+const app = createApp({ corsOrigins: env.corsOrigins });
 
-const app = express();
-
-app.use(express.json());
-app.get("/", (_, res) => {
-  res.json({
-    message: "Hello Express!"
-  });
-});
-
-app.listen(process.env.PORT, () => {
-  console.log(`Server running at port ${process.env.PORT}`);
+app.listen(env.port, () => {
+  console.log(`Server listening on port ${env.port}`);
 });
