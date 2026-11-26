@@ -175,6 +175,9 @@ export const EnglishStrings: Record<StringKey, string> = {
 
   notFoundTitle: 'Page not found',
   backToPlay: 'Back to play',
+  notFoundDescription:
+    "This point is empty — the page you're looking for doesn't exist or has moved.",
+  notFoundRules: 'Read the rules',
 
   ruleTurns:
     'Players alternate, black first, placing stones on the intersections. Stones never move.',

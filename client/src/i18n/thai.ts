@@ -173,6 +173,8 @@ export const ThaiStrings = {
 
   notFoundTitle: 'ไม่พบหน้านี้',
   backToPlay: 'กลับไปหน้าเล่น',
+  notFoundDescription: 'จุดนี้ว่างอยู่ — หน้าที่คุณค้นหาไม่มีอยู่หรือถูกย้ายไปแล้ว',
+  notFoundRules: 'อ่านกติกา',
 
   ruleTurns: 'ลงสลับกัน ดำเริ่มก่อน วางหมากที่จุดตัดของเส้น หมากที่วางแล้วไม่ขยับ',
   ruleLiberties:

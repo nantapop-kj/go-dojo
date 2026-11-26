@@ -1,9 +1,125 @@
-.not-found-link {
-  align-self: flex-start;
-  color: var(--accent);
-  text-decoration: none;
+.not-found {
+  margin: 48px auto;
+  width: 100%;
+  max-width: 520px;
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
 }
 
-.not-found-link:hover {
-  text-decoration: underline;
+.not-found-description {
+  margin: 4px 0 0;
+  max-width: 380px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.not-found-actions {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.not-found-actions .btn {
+  height: 44px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.not-found-actions .btn.primary {
+  color: var(--on-accent);
+}
+
+.mini-board {
+  --cell: 32px;
+  display: grid;
+  grid-template-columns: repeat(5, var(--cell));
+  grid-template-rows: repeat(5, var(--cell));
+  margin-bottom: 20px;
+  padding: 8px;
+  border-radius: 12px;
+  background: var(--chip);
+}
+
+.mini-board-point {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mini-board-point::before,
+.mini-board-point::after {
+  content: '';
+  position: absolute;
+  background: var(--line);
+  z-index: 0;
+}
+
+.mini-board-point::before {
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+}
+
+.mini-board-point::after {
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+}
+
+.mini-board-point:nth-child(5n + 1)::before {
+  left: 50%;
+}
+
+.mini-board-point:nth-child(5n)::before {
+  right: 50%;
+}
+
+.mini-board-point:nth-child(-n + 5)::after {
+  top: 50%;
+}
+
+.mini-board-point:nth-last-child(-n + 5)::after {
+  bottom: 50%;
+}
+
+.mini-board-point .stone-icon {
+  position: relative;
+  z-index: 1;
+  width: 26px;
+  height: 26px;
+}
+
+.mini-board-target {
+  position: relative;
+  z-index: 1;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px dashed var(--accent);
+  background: var(--accent-soft);
+}
+
+@media (max-width: 900px) {
+  .not-found {
+    margin: 16px auto;
+    padding: 32px 20px;
+  }
+
+  .mini-board {
+    --cell: 28px;
+  }
 }
