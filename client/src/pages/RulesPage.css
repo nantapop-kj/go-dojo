@@ -1,0 +1,21 @@
+.prose {
+  font-size: 16px;
+  line-height: 1.75;
+  max-width: 760px;
+}
+
+.prose h2 {
+  font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif;
+  font-size: 22px;
+  margin: 28px 0 8px;
+  color: var(--accent);
+}
+
+.prose ol,
+.prose ul {
+  padding-left: 22px;
+}
+
+.prose li {
+  margin-bottom: 6px;
+}

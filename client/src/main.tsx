@@ -1,9 +1,18 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import { BrowserRouter } from 'react-router-dom'
 import { App } from '@/App'
+import { PreferencesProvider } from '@/context/PreferencesContext'
+import { ToastProvider } from '@/context/ToastContext'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+    <BrowserRouter>
+      <PreferencesProvider>
+        <ToastProvider>
+          <App />
+        </ToastProvider>
+      </PreferencesProvider>
+    </BrowserRouter>
   </StrictMode>,
 )

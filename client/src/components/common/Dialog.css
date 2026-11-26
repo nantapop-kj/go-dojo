@@ -1,0 +1,29 @@
+dialog.modal {
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 24px;
+  width: min(480px, calc(100vw - 32px));
+  background: var(--surface-solid);
+  color: var(--text);
+  box-shadow: var(--shadow);
+  max-height: calc(100vh - 32px);
+}
+
+dialog.modal::backdrop {
+  background: var(--modal-backdrop);
+  backdrop-filter: blur(4px);
+}
+
+.modal h2 {
+  margin: 0 0 16px;
+  font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif;
+  font-size: 22px;
+}
+
+.modal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 20px;
+}

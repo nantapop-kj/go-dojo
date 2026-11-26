@@ -1,0 +1,12 @@
+.page-title {
+  margin: 4px 0 0;
+  font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  .page-title {
+    font-size: 30px;
+  }
+}

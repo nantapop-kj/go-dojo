@@ -1,0 +1,9 @@
+.not-found-link {
+  align-self: flex-start;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.not-found-link:hover {
+  text-decoration: underline;
+}

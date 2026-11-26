@@ -1,0 +1,9 @@
+.confirm-body {
+  color: var(--muted);
+}
+
+dialog.modal .btn.confirm-danger {
+  background: var(--bad);
+  border-color: var(--bad);
+  color: #fff;
+}
