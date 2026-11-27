@@ -1,0 +1,30 @@
+.player-card {
+  padding: 16px;
+  border-radius: 16px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.player-card.turn {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+.player-card-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+}
+
+.player-card-count {
+  margin-top: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 26px;
+}
+
+.player-card-caption {
+  font-size: 12px;
+  color: var(--muted);
+}

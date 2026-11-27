@@ -1,0 +1,62 @@
+.inspector {
+  background: var(--inspect);
+  border-color: var(--inspect-line);
+  min-height: 150px;
+}
+
+.inspector-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.inspector-point {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.inspector-status {
+  font-weight: 600;
+}
+
+.inspector-status.ok {
+  color: var(--accent);
+}
+
+.inspector-status.warn {
+  color: var(--warn);
+}
+
+.inspector-status.bad {
+  color: var(--bad);
+}
+
+.inspector-status.muted {
+  color: var(--muted);
+}
+
+.inspector-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.inspector-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 18px;
+}
+
+.inspector-caption {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.inspector-reason {
+  margin: 10px 0 0;
+  font-size: 13px;
+  color: var(--muted);
+}

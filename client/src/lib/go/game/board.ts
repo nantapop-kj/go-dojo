@@ -82,7 +82,6 @@ export class Board {
 
   cells: Uint8Array;
   geometry: Geometry;
-
   ko = -1;
   toPlay: Color = Black;
   captures: [number, number, number] = [0, 0, 0];

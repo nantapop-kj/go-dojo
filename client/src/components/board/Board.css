@@ -1,0 +1,24 @@
+.board-frame {
+  position: relative;
+  width: 100%;
+  max-width: min(820px, calc(100vh - 150px));
+  aspect-ratio: 1 / 1;
+  border-radius: 22px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.board-frame canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: manipulation;
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .board-frame {
+    max-width: 100%;
+    border-radius: 16px;
+  }
+}

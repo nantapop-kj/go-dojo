@@ -1,0 +1,32 @@
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.legend-dot.legal {
+  background: rgba(74, 49, 18, 0.55);
+}
+
+.legend-dot.warning {
+  background: #d97706;
+}
+
+.legend-cross {
+  color: #b3202f;
+}
