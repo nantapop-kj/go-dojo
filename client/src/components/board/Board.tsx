@@ -6,9 +6,11 @@ import '@/components/board/Board.css';
 interface BoardProps {
   board: GoBoard;
   version: number;
+  interactive: boolean;
   showLegal: boolean;
   showCoordinates: boolean;
   showTerritory: boolean;
+  ownership: Float32Array | null;
   hover: number;
   label: string;
   onHover: (point: number) => void;
@@ -28,9 +30,11 @@ const getStatuses = (board: GoBoard): MoveStatus[] => {
 export const Board = ({
   board,
   version,
+  interactive,
   showLegal,
   showCoordinates,
   showTerritory,
+  ownership,
   hover,
   label,
   onHover,
@@ -40,8 +44,8 @@ export const Board = ({
   const geometryRef = useRef<BoardGeometry>({ cell: 0, padding: 0 });
 
   const statuses = useMemo(
-    (): MoveStatus[] | null => (showLegal ? getStatuses(board) : null),
-    [board, version, showLegal],
+    (): MoveStatus[] | null => (interactive && showLegal ? getStatuses(board) : null),
+    [board, version, interactive, showLegal],
   );
 
   useEffect((): (() => void) | undefined => {
@@ -70,8 +74,9 @@ export const Board = ({
       geometryRef.current = drawBoard(context, cssWidth, board, {
         showCoordinates,
         showTerritory,
+        ownership,
         statuses,
-        hover,
+        hover: interactive ? hover : -1,
       });
     };
 
@@ -81,7 +86,7 @@ export const Board = ({
     observer.observe(canvas);
 
     return (): void => observer.disconnect();
-  }, [board, version, showCoordinates, showTerritory, statuses, hover]);
+  }, [board, version, interactive, showCoordinates, showTerritory, ownership, statuses, hover]);
 
   const pointAt = (clientX: number, clientY: number): number => {
     const canvas = canvasRef.current;

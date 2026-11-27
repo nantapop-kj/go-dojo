@@ -1,10 +1,11 @@
-import { Black, ColumnLetters, Empty, type Board, type MoveStatus } from '@/lib/go';
+import { Black, ColumnLetters, Empty, White, type Board, type MoveStatus } from '@/lib/go';
 import { BoardColors, StarPoints } from '@/constants/board';
 import { circle, cross, roundRect, stone } from '@/components/board/canvasShapes';
 
 export interface DrawOptions {
   showCoordinates: boolean;
   showTerritory: boolean;
+  ownership: Float32Array | null;
   statuses: readonly MoveStatus[] | null;
   hover: number;
 }
@@ -104,15 +105,17 @@ export const drawBoard = (
     );
   }
 
-  if (options.showTerritory) {
-    const { owner } = board.areaScore();
-    const markSize = cell * 0.34;
-
+  if (options.showTerritory && options.ownership) {
     for (let point = 0; point < board.pointCount; point++) {
-      if (board.cells[point] !== Empty || !owner[point]) continue;
+      const owned = options.ownership[point];
+      const cellColor = board.cells[point];
+      const ownerColor = owned > 0 ? Black : White;
+
+      if (Math.abs(owned) < 0.25 || cellColor === ownerColor) continue;
 
       const [x, y] = board.toCoordinates(point);
-      const isBlack = owner[point] === Black;
+      const isBlack = ownerColor === Black;
+      const markSize = cell * 0.4 * Math.abs(owned);
 
       context.fillStyle = isBlack ? palette.blackMark : palette.whiteMark;
       context.strokeStyle = isBlack ? palette.blackMarkStroke : palette.whiteMarkStroke;

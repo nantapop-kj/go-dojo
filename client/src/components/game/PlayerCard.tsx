@@ -1,31 +1,35 @@
 import type { JSX } from 'react';
-import { Black, White, type Board, type Color } from '@/lib/go';
+import { Black, White, type Color } from '@/lib/go';
 import { StoneIcon } from '@/components/common/StoneIcon';
+import { BotLevelKeys } from '@/constants/botLevels';
+import { GamePhase } from '@/enums';
 import { useTranslation } from '@/hooks/useTranslation';
+import type { GameController } from '@/services/game/GameController';
 import '@/components/game/PlayerCard.css';
 
 interface PlayerCardProps {
-  board: Board;
+  game: GameController;
   color: Color;
-  komi: number;
 }
 
-export const PlayerCard = ({ board, color, komi }: PlayerCardProps): JSX.Element => {
+export const PlayerCard = ({ game, color }: PlayerCardProps): JSX.Element => {
   const { translate } = useTranslation();
-  const isBlack = color === Black;
-  const isTurn = board.toPlay === color;
-  const name = translate(isBlack ? 'black' : 'white');
+  const isPlayer = color === game.player;
+  const isTurn = game.phase === GamePhase.Play && game.board.toPlay === color;
 
   return (
     <div className={`player-card${isTurn ? ' turn' : ''}`}>
       <div className="player-card-head">
-        <StoneIcon black={isBlack} />
-        <span>{name}</span>
+        <StoneIcon black={color === Black} />
+        <span>{translate(isPlayer ? 'you' : 'bot')}</span>
+        {!isPlayer && (
+          <span className="player-card-level">{translate(BotLevelKeys[game.settings.level])}</span>
+        )}
       </div>
-      <div className="player-card-count">{board.captures[color]}</div>
+      <div className="player-card-count">{game.board.captures[color]}</div>
       <div className="player-card-caption">
         {translate('captured')}
-        {color === White && ` · ${translate('komi')} ${komi}`}
+        {color === White && ` · ${translate('komi')} ${game.settings.komi}`}
       </div>
     </div>
   );

@@ -17,7 +17,7 @@ export const PlayPage = (): JSX.Element => {
   const { preferences } = usePreferences();
   const { translate } = useTranslation();
   const { hover, setHover, handlePoint } = useBoardInteraction(game);
-  const { board, settings } = game;
+  const { board } = game;
 
   return (
     <main className="play">
@@ -25,9 +25,11 @@ export const PlayPage = (): JSX.Element => {
         <Board
           board={board}
           version={version}
+          interactive={game.humanTurn}
           showLegal={preferences.showLegal}
           showCoordinates={preferences.showCoordinates}
           showTerritory={preferences.showTerritory}
+          ownership={game.ownership}
           hover={hover}
           label={`${translate('board')} ${board.size}×${board.size}`}
           onHover={setHover}
@@ -37,10 +39,10 @@ export const PlayPage = (): JSX.Element => {
       </section>
       <aside className="play-panel">
         <div className="play-players">
-          <PlayerCard board={board} color={Black} komi={settings.komi} />
-          <PlayerCard board={board} color={White} komi={settings.komi} />
+          <PlayerCard game={game} color={Black} />
+          <PlayerCard game={game} color={White} />
         </div>
-        <Inspector board={board} hover={hover} />
+        <Inspector game={game} hover={hover} />
         <GameActions game={game} />
         <DisplayToggles />
       </aside>

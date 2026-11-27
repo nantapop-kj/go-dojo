@@ -1,9 +1,7 @@
 import { useContext, useSyncExternalStore } from 'react';
-import { GameContext } from '@/context/GameContext';
-import type { GameController } from '@/services/game/GameController';
+import { GameContext, type GameContextValue } from '@/context/GameContext';
 
-interface GameState {
-  game: GameController;
+interface GameState extends GameContextValue {
   version: number;
 }
 
@@ -16,5 +14,5 @@ export const useGame = (): GameState => {
 
   const version = useSyncExternalStore(value.game.subscribe, value.game.getVersion);
 
-  return { game: value.game, version };
+  return { ...value, version };
 };

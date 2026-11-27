@@ -1,13 +1,15 @@
 import type { JSX } from 'react';
-import { inspectMove, type Board, type MoveStatus } from '@/lib/go';
+import { inspectMove, type MoveStatus } from '@/lib/go';
 import { Card } from '@/components/common/Card';
 import { Eyebrow } from '@/components/common/Eyebrow';
+import { GamePhase } from '@/enums';
 import { useTranslation } from '@/hooks/useTranslation';
 import type { StringKey } from '@/i18n';
+import type { GameController } from '@/services/game/GameController';
 import '@/components/game/Inspector.css';
 
 interface InspectorProps {
-  board: Board;
+  game: GameController;
   hover: number;
 }
 
@@ -33,19 +35,28 @@ const ReasonKeys: Partial<Record<MoveStatus, StringKey>> = {
   selfAtari: 'reasonSelfAtari',
 };
 
-export const Inspector = ({ board, hover }: InspectorProps): JSX.Element => {
-  const { translate } = useTranslation();
+const getIdleKey = (game: GameController): StringKey => {
+  if (game.phase === GamePhase.Over) {
+    return game.result?.winner === game.player ? 'youWon' : 'youLost';
+  }
 
-  if (hover < 0) {
+  return game.thinking ? 'botThinking' : 'hoverToInspect';
+};
+
+export const Inspector = ({ game, hover }: InspectorProps): JSX.Element => {
+  const { translate } = useTranslation();
+  const { board } = game;
+
+  if (hover < 0 || !game.humanTurn) {
     return (
       <Card className="inspector">
         <Eyebrow>{translate('inspect')}</Eyebrow>
-        <p className="inspector-reason">{translate('hoverToInspect')}</p>
+        <p className="inspector-reason">{translate(getIdleKey(game))}</p>
       </Card>
     );
   }
 
-  const inspection = inspectMove(board, hover, board.toPlay);
+  const inspection = inspectMove(board, hover, game.player);
   const { status } = inspection;
   const reasonKey = ReasonKeys[status];
   const isPlayable = status === 'legal' || status === 'selfAtari';
